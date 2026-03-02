@@ -15,6 +15,13 @@ DECISION: REFUSE
 All responses follow a controlled format and enforce clear scope boundaries, safety handling, and post-generation validation.
 
 ==================================================
+## Link to the Live Chatbot
+
+You must use a Columbia email to sign in.
+
+https://table-talk-git-275751645735.europe-west1.run.app/
+
+==================================================
 ## Prerequisites
 
 You must have Google Cloud set up with Vertex AI enabled.
@@ -155,3 +162,4 @@ Evaluations make live LLM calls to both the bot and a judge model.
 They require network access and will incur API costs.
 
 ==================================================
+
