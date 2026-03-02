@@ -1,0 +1,13 @@
+[project]
+name = "table-talk"
+version = "0.1.0"
+description = "Chatbot that helps you decide what to eat for dinner"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.109.0",
+    "uvicorn>=0.27.0",
+    "litellm>=1.30.0",
+    "google-cloud-aiplatform>=1.40.0",
+    "python-dotenv>=1.0.0",
+    "pytest>=8.0.0",
+]

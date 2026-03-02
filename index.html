@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TableTalk | Dish Recommender</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&family=The+Girl+Next+Door&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #f9f6f1;
+        --ink: #161616;
+        --muted: #6f6a62;
+        --line: #e0d9cf;
+        --panel: #ffffff;
+        --panel2: #fbfaf7;
+
+        --accent: #c97a2b;
+        --accent2: #2a9d8f;
+        --danger: #b93b4a;
+
+        --shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+        --radius: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Georgia", "Times New Roman", serif;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 3rem 1rem;
+        background:
+          radial-gradient(700px 400px at 15% 10%, rgba(201, 122, 43, 0.10), transparent 60%),
+          radial-gradient(650px 420px at 85% 12%, rgba(42, 157, 143, 0.10), transparent 60%),
+          var(--bg);
+        color: var(--ink);
+      }
+
+      #container {
+        width: 100%;
+        max-width: 980px;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.55);
+        box-shadow: var(--shadow);
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+
+      #header {
+        padding: 1.35rem 1.75rem 1.1rem;
+        border-bottom: 1px solid var(--line);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(251, 250, 247, 0.85));
+      }
+
+      #headerTop {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      #brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      #logo {
+        width: 42px;
+        height: 42px;
+        border-radius: 15px;
+        background:
+          radial-gradient(18px 18px at 30% 30%, rgba(255, 255, 255, 0.65), transparent 60%),
+          linear-gradient(135deg, rgba(201, 122, 43, 0.95), rgba(185, 59, 74, 0.90));
+        border: 1px solid rgba(0, 0, 0, 0.06);
+      }
+
+      #header h1 {
+        font-size: 1.2rem;
+        font-weight: normal;
+        font-style: italic;
+        letter-spacing: 0.02em;
+        line-height: 1.1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      #header p {
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-top: 0.25rem;
+      }
+
+      #headerActions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.7);
+        font-family: system-ui, sans-serif;
+        font-size: 12px;
+        color: var(--muted);
+        user-select: none;
+      }
+
+      .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 99px;
+        background: var(--accent2);
+        box-shadow: 0 0 0 4px rgba(42, 157, 143, 0.15);
+      }
+
+      .btn {
+        padding: 0.7rem 1rem;
+        background: #000;
+        color: #fff;
+        border: none;
+        font-family: system-ui, sans-serif;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        border-radius: 12px;
+      }
+
+      .btn.secondary {
+        background: transparent;
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
+
+      .btn:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+
+      #messages {
+        overflow-y: auto;
+        padding: 1.5rem 1.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        min-height: 460px;
+        max-height: 70vh;
+        background: rgba(255, 255, 255, 0.45);
+      }
+
+      .msg {
+        line-height: 1.6;
+        max-width: 86%;
+      }
+
+      .msg.user {
+        align-self: flex-end;
+        text-align: right;
+        font-family: "Playwrite DE Grund", cursive;
+        font-size: 1.05rem;
+      }
+
+      .msg.assistant {
+        align-self: flex-start;
+        font-family: "Playwrite DE Grund", cursive;
+        font-weight: 400;
+        font-size: 0.88rem;
+      }
+
+      .msg .role {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #999;
+        margin-bottom: 0.25rem;
+        font-family: system-ui, sans-serif;
+      }
+
+      .bubble {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 12px 14px;
+      }
+
+      .msg.user .bubble {
+        background: rgba(42, 157, 143, 0.08);
+        border-color: rgba(42, 157, 143, 0.25);
+      }
+
+      .msg.assistant .bubble {
+        background: rgba(201, 122, 43, 0.07);
+        border-color: rgba(201, 122, 43, 0.22);
+      }
+
+      .msg .content {
+        white-space: pre-wrap;
+      }
+
+      .msg.loading .content {
+        color: #999;
+        font-style: italic;
+      }
+
+      .cards {
+        margin-top: 10px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 12px 14px;
+      }
+
+      .dishRow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .dishName {
+        font-family: system-ui, sans-serif;
+        font-size: 15px;
+        font-weight: 800;
+        letter-spacing: 0.2px;
+        color: var(--ink);
+      }
+
+      .badge {
+        font-family: system-ui, sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.9);
+        color: #fff;
+      }
+
+      .sectionTitle {
+        font-family: system-ui, sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+
+      .list {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .list li {
+        margin: 4px 0;
+      }
+
+      #hintbar {
+        padding: 0.9rem 1.75rem 0;
+        background: rgba(255, 255, 255, 0.45);
+        border-top: 1px solid var(--line);
+      }
+
+      .chipRow {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .chip {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.7);
+        color: var(--muted);
+        font-family: system-ui, sans-serif;
+        font-size: 12px;
+        padding: 8px 10px;
+        border-radius: 999px;
+        cursor: pointer;
+      }
+
+      .chip:hover {
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--ink);
+      }
+
+      #input-area {
+        display: flex;
+        gap: 1rem;
+        padding: 1.25rem 1.75rem 1.45rem;
+        border-top: 1px solid var(--line);
+        background: linear-gradient(180deg, rgba(251, 250, 247, 0.85), rgba(255, 255, 255, 0.9));
+      }
+
+      #user-input {
+        flex: 1;
+        padding: 0.75rem 0;
+        border: none;
+        border-bottom: 1px solid var(--line);
+        font-family: "The Girl Next Door", cursive;
+        font-size: 1.02rem;
+        outline: none;
+        background: transparent;
+      }
+
+      #user-input:focus {
+        border-bottom-color: #000;
+      }
+
+      #footerNote {
+        padding: 0 1.75rem 1.2rem;
+        font-size: 12px;
+        color: #9a948b;
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      @media (max-width: 640px) {
+        body {
+          padding: 1.5rem 0.75rem;
+        }
+        #messages {
+          padding: 1.1rem 1.1rem;
+        }
+        #header, #input-area, #hintbar, #footerNote {
+          padding-left: 1.1rem;
+          padding-right: 1.1rem;
+        }
+        .pill {
+          display: none;
+        }
+        .msg {
+          max-width: 92%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container">
+      <div id="header">
+        <div id="headerTop">
+          <div id="brand">
+            <div id="logo" aria-hidden="true"></div>
+            <div style="min-width: 0;">
+              <h1>TableTalk</h1>
+              <p>Tell me what you feel like eating. I will recommend a dish or ask a few questions.</p>
+            </div>
+          </div>
+
+          <div id="headerActions">
+            <div class="pill" title="Backend status (best effort)">
+              <span class="dot" aria-hidden="true"></span>
+              <span id="statusText">Connected</span>
+            </div>
+            <button class="btn secondary" id="clear-btn" type="button">Clear</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="messages"></div>
+
+      <div id="hintbar">
+        <div class="chipRow">
+          <button class="chip" type="button" data-prompt="I want something spicy but not too heavy.">
+            Spicy, not heavy
+          </button>
+          <button class="chip" type="button" data-prompt="Comfort food. No seafood.">
+            Comfort, no seafood
+          </button>
+          <button class="chip" type="button" data-prompt="Quick lunch under $15.">
+            Quick lunch under $15
+          </button>
+          <button class="chip" type="button" data-prompt="High protein, post workout meal.">
+            High protein
+          </button>
+        </div>
+      </div>
+
+      <div id="input-area">
+        <input
+          type="text"
+          id="user-input"
+          placeholder="Example: I want ramen, but not too oily."
+          autocomplete="off"
+        />
+        <button class="btn" id="send-btn">Send</button>
+      </div>
+
+      <div id="footerNote">
+        Tip: Mention spicy level, budget, and any avoid list.
+      </div>
+    </div>
+
+    <script>
+      const messages = document.getElementById("messages");
+      const userInput = document.getElementById("user-input");
+      const sendBtn = document.getElementById("send-btn");
+      const clearBtn = document.getElementById("clear-btn");
+      const statusText = document.getElementById("statusText");
+
+      let sessionId = null;
+
+      function escapeHtml(s) {
+        return (s || "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function parseStructured(raw) {
+        const s = { decision: null, dish: null, questions: [], alts: [] };
+        const lines = (raw || "").split(/\r?\n/);
+
+        for (const line of lines) {
+          const mDecision = line.match(/^DECISION:\s*(ASK|RECOMMEND|REFUSE)\s*$/i);
+          if (mDecision) {
+            s.decision = mDecision[1].toUpperCase();
+            continue;
+          }
+
+          const mDish = line.match(/^DISH:\s*(.+)\s*$/i);
+          if (mDish) {
+            s.dish = mDish[1].trim();
+            continue;
+          }
+
+          const mQ = line.match(/^Q[1-9]:\s*(.+)\s*$/i);
+          if (mQ) {
+            s.questions.push(mQ[1].trim());
+            continue;
+          }
+
+          const mAlt = line.match(/^ALT:\s*(.+)\s*$/i);
+          if (mAlt) {
+            s.alts.push(mAlt[1].trim());
+            continue;
+          }
+        }
+
+        const hasAny = !!(s.decision || s.dish || s.questions.length || s.alts.length);
+        return hasAny ? s : null;
+      }
+
+      function stripStructuredFromText(raw) {
+        const lines = (raw || "").split(/\r?\n/);
+        const kept = [];
+        for (const line of lines) {
+          if (/^DECISION:\s*(ASK|RECOMMEND|REFUSE)\s*$/i.test(line)) continue;
+          if (/^DISH:\s*.+\s*$/i.test(line)) continue;
+          if (/^Q[1-9]:\s*.+\s*$/i.test(line)) continue;
+          if (/^ALT:\s*.+\s*$/i.test(line)) continue;
+          kept.push(line);
+        }
+        return kept.join("\n").trim();
+      }
+
+      function renderCards(structured) {
+        if (!structured) return "";
+
+        const decisionText = structured.decision || "RESULT";
+        let html = '<div class="cards">';
+
+        if (structured.dish) {
+          html +=
+            '<div class="card">' +
+              '<div class="dishRow">' +
+                '<div class="dishName">' + escapeHtml(structured.dish) + "</div>" +
+                '<div class="badge">' + escapeHtml(decisionText) + "</div>" +
+              "</div>" +
+            "</div>";
+        }
+
+        if (structured.questions && structured.questions.length) {
+          html +=
+            '<div class="card">' +
+              '<div class="sectionTitle">Quick questions</div>' +
+              '<ul class="list">' +
+                structured.questions.map(q => "<li>" + escapeHtml(q) + "</li>").join("") +
+              "</ul>" +
+            "</div>";
+        }
+
+        if (structured.alts && structured.alts.length) {
+          html +=
+            '<div class="card">' +
+              '<div class="sectionTitle">Alternatives</div>' +
+              '<ul class="list">' +
+                structured.alts.map(a => "<li>" + escapeHtml(a) + "</li>").join("") +
+              "</ul>" +
+            "</div>";
+        }
+
+        html += "</div>";
+        return html;
+      }
+
+      function addMessage(role, text, isLoading = false, structured = null) {
+        const div = document.createElement("div");
+        div.className =
+          "msg " +
+          (role === "you" ? "user" : "assistant") +
+          (isLoading ? " loading" : "");
+
+        const safeText = escapeHtml(text);
+
+        div.innerHTML =
+          '<div class="role">' +
+            escapeHtml(role) +
+          '</div>' +
+          '<div class="bubble">' +
+            '<div class="content">' + safeText + "</div>" +
+            (structured ? renderCards(structured) : "") +
+          "</div>";
+
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight;
+        return div;
+      }
+
+      async function send() {
+        const text = userInput.value.trim();
+        if (!text) return;
+
+        userInput.value = "";
+        sendBtn.disabled = true;
+
+        addMessage("you", text);
+
+        const loading = addMessage("TableTalk", "Thinking...", true);
+
+        try {
+          const res = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              message: text,
+              session_id: sessionId,
+            }),
+          });
+
+          if (!res.ok) {
+            throw new Error("HTTP " + res.status);
+          }
+
+          const data = await res.json();
+          sessionId = data.session_id;
+
+          const raw = data.response || "";
+          const structured = parseStructured(raw);
+          const cleaned = stripStructuredFromText(raw);
+
+          statusText.textContent = "Connected";
+
+          loading.querySelector(".content").textContent = cleaned || (structured ? "" : raw);
+          loading.classList.remove("loading");
+
+          if (structured) {
+            const bubble = loading.querySelector(".bubble");
+            bubble.insertAdjacentHTML("beforeend", renderCards(structured));
+          }
+        } catch (e) {
+          statusText.textContent = "Disconnected";
+          loading.querySelector(".content").textContent = "Error: " + e.message;
+          loading.classList.remove("loading");
+        }
+
+        sendBtn.disabled = false;
+        userInput.focus();
+      }
+
+      function clearChat() {
+        messages.innerHTML = "";
+        sessionId = null;
+        statusText.textContent = "Connected";
+        addMessage(
+          "TableTalk",
+          "Tell me what you are craving. Include spicy level, budget, and any dislikes.",
+          false
+        );
+      }
+
+      // Chips
+      Array.from(document.querySelectorAll(".chip")).forEach((chip) => {
+        chip.addEventListener("click", () => {
+          userInput.value = chip.getAttribute("data-prompt") || "";
+          userInput.focus();
+        });
+      });
+
+      sendBtn.addEventListener("click", send);
+      clearBtn.addEventListener("click", clearChat);
+
+      userInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") send();
+      });
+
+      clearChat();
+      userInput.focus();
+    </script>
+  </body>
+</html>
