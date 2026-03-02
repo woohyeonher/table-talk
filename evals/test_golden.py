@@ -99,9 +99,10 @@ GOLDEN_EXAMPLES = [
         "category": "in_domain",
         "input": "Quick lunch under $10. No seafood. Recommend one dish.",
         "reference": (
-            "DECISION: REFUSE\n"
-            "WHY: I need more information to recommend a dish from the catalog.\n"
-            "ALT: Please tell me any dietary restrictions and whether you prefer a rice plate, sandwich, or soup.\n"
+            "DECISION: ASK\n"
+            "Q1: Any dietary restrictions or allergies?\n"
+            "Q2: Do you prefer a rice plate, sandwich, or soup?\n"
+            "ALT: If you're unsure, a simple chicken salad is a good neutral option.\n"
         ),
     },
     {

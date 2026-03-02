@@ -51,6 +51,219 @@ MENU = {
     "veggie_burrito_bowl": {
         "tags": ["vegetarian", "filling", "quick", "mexican_option", "rice"],
     },
+    "grilled_chicken_wrap": {
+        "tags": ["high_protein", "quick", "filling", "mild"],
+    },
+    "steak_fajitas": {
+        "tags": ["high_protein", "filling", "spicy", "mexican_option"],
+    },
+    "korean_bbq_beef_bowl": {
+        "tags": ["high_protein", "filling", "rice", "korean", "medium"],
+    },
+    "pad_thai": {
+        "tags": ["filling", "medium", "noodles", "thai_option"],
+    },
+    "chicken_alfredo_pasta": {
+        "tags": ["high_protein", "comfort", "filling", "italian"],
+    },
+    "margherita_pizza": {
+        "tags": ["comfort", "filling", "italian", "vegetarian_option"],
+    },
+    "black_bean_quesadilla": {
+        "tags": ["vegetarian", "quick", "filling", "mexican_option"],
+    },
+    "miso_soup_with_rice": {
+        "tags": ["light", "japanese_option", "comfort"],
+    },
+    "grilled_salmon_salad": {
+        "tags": ["high_protein", "light", "salad", "seafood"],
+    },
+    "chicken_noodle_soup": {
+        "tags": ["comfort", "light", "medium"],
+    },
+    "beef_burger": {
+        "tags": ["high_protein", "filling", "comfort"],
+    },
+    "vegan_buddha_bowl": {
+        "tags": ["vegan_option", "vegetarian", "light", "rice"],
+    },
+    "chickpea_curry": {
+        "tags": ["vegetarian", "vegan_option", "spicy", "medium", "comfort"],
+    },
+    "butter_chicken": {
+        "tags": ["high_protein", "comfort", "medium", "rice", "indian_option"],
+    },
+    "ramen": {
+        "tags": ["comfort", "filling", "noodles", "japanese_option"],
+    },
+    "tuna_salad_wrap": {
+        "tags": ["high_protein", "quick", "light", "seafood"],
+    },
+    "avocado_toast": {
+        "tags": ["vegetarian", "light", "quick"],
+    },
+    "falafel_pita": {
+        "tags": ["vegetarian", "filling", "middle_eastern_option"],
+    },
+    "bbq_pulled_pork_sandwich": {
+        "tags": ["filling", "comfort", "medium"],
+    },
+    "thai_green_curry": {
+        "tags": ["spicy", "medium", "rice", "thai_option"],
+    },
+    "grilled_chicken_plate": {
+        "tags": ["high_protein", "filling", "mild"],
+    },
+    "bbq_chicken_rice_bowl": {
+        "tags": ["high_protein", "filling", "rice", "medium"],
+    },
+    "chicken_shawarma_plate": {
+        "tags": ["high_protein", "filling", "middle_eastern_option"],
+    },
+    "chicken_parmesan": {
+        "tags": ["high_protein", "comfort", "filling", "italian"],
+    },
+    "lemon_pepper_chicken": {
+        "tags": ["high_protein", "light", "mild"],
+    },
+    "buffalo_chicken_wrap": {
+        "tags": ["high_protein", "filling", "spicy"],
+    },
+
+    "steak_rice_bowl": {
+        "tags": ["high_protein", "filling", "rice", "medium"],
+    },
+    "garlic_butter_steak": {
+        "tags": ["high_protein", "filling", "mild"],
+    },
+    "beef_tacos": {
+        "tags": ["high_protein", "filling", "mexican_option"],
+    },
+    "beef_udon": {
+        "tags": ["high_protein", "filling", "noodles", "japanese_option"],
+    },
+    "bulgogi_plate": {
+        "tags": ["high_protein", "filling", "korean", "medium"],
+    },
+
+    "teriyaki_salmon": {
+        "tags": ["high_protein", "mild", "seafood"],
+    },
+    "spicy_tuna_poke_bowl": {
+        "tags": ["high_protein", "spicy", "rice", "seafood"],
+    },
+    "grilled_shrimp_rice_bowl": {
+        "tags": ["high_protein", "rice", "seafood", "medium"],
+    },
+    "fish_and_chips": {
+        "tags": ["seafood", "comfort", "filling"],
+    },
+    "seafood_paella": {
+        "tags": ["seafood", "rice", "filling"],
+    },
+
+    "vegetable_curry": {
+        "tags": ["vegetarian", "vegan_option", "spicy", "rice", "indian_option"],
+    },
+    "paneer_tikka_masala": {
+        "tags": ["vegetarian", "high_protein", "comfort", "indian_option"],
+    },
+    "mushroom_risotto": {
+        "tags": ["vegetarian", "comfort", "medium", "italian"],
+    },
+    "spinach_ricotta_pasta": {
+        "tags": ["vegetarian", "comfort", "italian"],
+    },
+    "veggie_lo_mein": {
+        "tags": ["vegetarian", "filling", "noodles"],
+    },
+    "falafel_rice_bowl": {
+        "tags": ["vegetarian", "filling", "rice", "middle_eastern_option"],
+    },
+    "stuffed_bell_peppers": {
+        "tags": ["vegetarian", "medium", "comfort"],
+    },
+    "quinoa_veggie_bowl": {
+        "tags": ["vegetarian", "light", "gluten_free_option"],
+    },
+
+    "chicken_ramen": {
+        "tags": ["high_protein", "noodles", "comfort", "japanese_option"],
+    },
+    "tonkotsu_ramen": {
+        "tags": ["filling", "noodles", "comfort", "japanese_option"],
+    },
+    "udon_soup": {
+        "tags": ["noodles", "light", "japanese_option"],
+    },
+    "pad_see_ew": {
+        "tags": ["filling", "noodles", "thai_option", "medium"],
+    },
+    "drunken_noodles": {
+        "tags": ["spicy", "filling", "noodles", "thai_option"],
+    },
+
+    "turkey_sandwich": {
+        "tags": ["high_protein", "quick", "light"],
+    },
+    "ham_and_cheese_sandwich": {
+        "tags": ["quick", "mild"],
+    },
+    "grilled_cheese": {
+        "tags": ["comfort", "quick", "vegetarian_option"],
+    },
+    "chicken_panini": {
+        "tags": ["high_protein", "filling", "italian"],
+    },
+    "club_sandwich": {
+        "tags": ["high_protein", "filling"],
+    },
+
+    "caesar_salad": {
+        "tags": ["light", "salad"],
+    },
+    "greek_salad": {
+        "tags": ["vegetarian", "light", "salad"],
+    },
+    "cobb_salad": {
+        "tags": ["high_protein", "filling", "salad"],
+    },
+    "asian_sesame_salad": {
+        "tags": ["light", "salad"],
+    },
+
+    "chicken_katsu": {
+        "tags": ["high_protein", "filling", "rice", "japanese_option"],
+    },
+    "yakitori_plate": {
+        "tags": ["high_protein", "mild", "japanese_option"],
+    },
+    "kimchi_fried_rice": {
+        "tags": ["spicy", "filling", "rice", "korean"],
+    },
+    "japchae": {
+        "tags": ["noodles", "medium", "korean"],
+    },
+
+    "burrito": {
+        "tags": ["filling", "mexican_option"],
+    },
+    "chicken_enchiladas": {
+        "tags": ["filling", "mexican_option", "medium"],
+    },
+    "queso_loaded_nachos": {
+        "tags": ["comfort", "filling", "mexican_option"],
+    },
+
+    "butternut_squash_soup": {
+        "tags": ["vegetarian", "light", "comfort"],
+    },
+    "minestrone_soup": {
+        "tags": ["vegetarian", "medium", "comfort", "italian"],
+    },
+    "clam_chowder": {
+        "tags": ["seafood", "comfort", "filling"],
+    },
 }
 
 SYSTEM_PROMPT = """\
@@ -446,4 +659,6 @@ def clear(session_id: str | None = None):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
+    # uvicorn.run(app, host="127.0.0.1", port=8000)
