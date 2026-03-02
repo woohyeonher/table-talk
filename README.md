@@ -25,7 +25,21 @@ VERTEXAI_PROJECT=your-project-id
 VERTEXAI_LOCATION=us-central1
 
 You must also be authenticated with gcloud.
+==================================================
+## Installation
 
+Clone the repository and create a virtual environment.
+
+```bash
+python -m venv .venv
+.\.venv\Scripts\activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
 ==================================================
 ## Running the App
 
